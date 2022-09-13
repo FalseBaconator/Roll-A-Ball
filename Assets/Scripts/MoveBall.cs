@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 public class MoveBall : MonoBehaviour
 {
 
+    public float Speed;
+
     private Rigidbody rb;
     private float MovementX;
     private float MovementY;
@@ -25,9 +27,9 @@ public class MoveBall : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 Move = new Vector3(MovementX * 5, 0, MovementY * 5);
+        Vector3 Move = new Vector3(MovementX, 0, MovementY);
 
-        rb.AddForce(Move);
+        rb.AddForce(Move * Speed);
     }
 
 }
