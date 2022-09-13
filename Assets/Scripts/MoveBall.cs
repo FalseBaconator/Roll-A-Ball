@@ -8,6 +8,8 @@ public class MoveBall : MonoBehaviour
 {
 
     public float Speed;
+    public TextMeshProUGUI HPText;
+    public int StartHP;
     public TextMeshProUGUI ScoreText;
     public int MaxScore;
     public GameObject WinMessage;
@@ -17,12 +19,15 @@ public class MoveBall : MonoBehaviour
     private float MovementY;
 
     private int ScoreCount;
+    private int HPCount;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        HPCount = StartHP;
         ScoreCount = 0;
+        SetHPText();
         SetScoreText();
         WinMessage.SetActive(false);
     }
@@ -48,6 +53,10 @@ public class MoveBall : MonoBehaviour
             other.gameObject.SetActive(false);
             ScoreCount++;
             SetScoreText();
+        }else if (other.gameObject.CompareTag("Obstacles"))
+        {
+            HPCount = HPCount - 1;
+            SetHPText();
         }
     }
 
@@ -60,4 +69,12 @@ public class MoveBall : MonoBehaviour
         }
     }
 
+    void SetHPText()
+    {
+        HPText.text = "Health: " + HPCount.ToString();
+        if(HPCount <= 0)
+        {
+            gameObject.SetActive(false);
+        }
+    }
 }
