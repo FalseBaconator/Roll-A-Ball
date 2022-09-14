@@ -13,6 +13,7 @@ public class MoveBall : MonoBehaviour
     public TextMeshProUGUI ScoreText;
     public int MaxScore;
     public GameObject WinMessage;
+    public GameObject LoseMessage;
 
     private Rigidbody rb;
     private float MovementX;
@@ -30,6 +31,7 @@ public class MoveBall : MonoBehaviour
         SetHPText();
         SetScoreText();
         WinMessage.SetActive(false);
+        LoseMessage.SetActive(false);
     }
 
     void OnMove(InputValue MovementValue)
@@ -75,6 +77,7 @@ public class MoveBall : MonoBehaviour
         if(HPCount <= 0)
         {
             gameObject.SetActive(false);
+            LoseMessage.SetActive(true);
         }
     }
 }
