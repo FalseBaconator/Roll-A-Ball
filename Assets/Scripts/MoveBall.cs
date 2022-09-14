@@ -22,6 +22,8 @@ public class MoveBall : MonoBehaviour
     private int ScoreCount;
     private int HPCount;
 
+    private bool Won;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,7 @@ public class MoveBall : MonoBehaviour
         SetScoreText();
         WinMessage.SetActive(false);
         LoseMessage.SetActive(false);
+        Won = false;
     }
 
     void OnMove(InputValue MovementValue)
@@ -55,7 +58,7 @@ public class MoveBall : MonoBehaviour
             other.gameObject.SetActive(false);
             ScoreCount++;
             SetScoreText();
-        }else if (other.gameObject.CompareTag("Obstacles"))
+        }else if (other.gameObject.CompareTag("Obstacles") && Won==false)
         {
             HPCount = HPCount - 1;
             SetHPText();
@@ -68,6 +71,7 @@ public class MoveBall : MonoBehaviour
         if(ScoreCount >= MaxScore)
         {
             WinMessage.SetActive(true);
+            Won = true;
         }
     }
 
