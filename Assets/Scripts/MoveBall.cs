@@ -12,6 +12,8 @@ public class MoveBall : MonoBehaviour
     public int StartHP;
     public TextMeshProUGUI ScoreText;
     public int MaxScore;
+    public GameObject FinishMessage;
+    public TextMeshProUGUI FinishText;
     public GameObject WinMessage;
     public GameObject LoseMessage;
 
@@ -32,6 +34,7 @@ public class MoveBall : MonoBehaviour
         ScoreCount = 0;
         SetHPText();
         SetScoreText();
+        FinishMessage.SetActive(false);
         WinMessage.SetActive(false);
         LoseMessage.SetActive(false);
         Won = false;
@@ -62,17 +65,26 @@ public class MoveBall : MonoBehaviour
         {
             HPCount = HPCount - 1;
             SetHPText();
+        }else if (other.gameObject.CompareTag("InstaDeath") && Won == false)
+        {
+            HPCount = 0;
+            SetHPText();
+        }else if (other.gameObject.CompareTag("End Game"))
+        {
+            FinishText.text = "You Finished With A Score of " + ScoreCount.ToString() + "/20";
+            FinishMessage.SetActive(true);
+            Won = true;
+            if(ScoreCount >= MaxScore)
+            {
+                WinMessage.SetActive(true);
+            }
+            other.gameObject.SetActive(false);
         }
     }
 
     void SetScoreText()
     {
         ScoreText.text = "Score: " + ScoreCount.ToString();
-        if(ScoreCount >= MaxScore)
-        {
-            WinMessage.SetActive(true);
-            Won = true;
-        }
     }
 
     void SetHPText()

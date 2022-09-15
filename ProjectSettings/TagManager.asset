@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Collectible
   - Obstacles
+  - InstaDeath
+  - End Game
   layers:
   - Default
   - TransparentFX
