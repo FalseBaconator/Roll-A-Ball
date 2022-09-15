@@ -58,7 +58,6 @@ public class MoveBall : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Collectible"))
         {
-            other.gameObject.SetActive(false);
             ScoreCount++;
             SetScoreText();
         }else if (other.gameObject.CompareTag("Obstacles") && Won==false)
@@ -78,8 +77,8 @@ public class MoveBall : MonoBehaviour
             {
                 WinMessage.SetActive(true);
             }
-            other.gameObject.SetActive(false);
         }
+        other.gameObject.SetActive(false);
     }
 
     void SetScoreText()
